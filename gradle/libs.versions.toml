@@ -11,7 +11,7 @@ shadow = "8.1.8"
 [libraries]
 clikt = "com.github.ajalt.clikt:clikt:5.0.2"
 gradle-api-69 = "dev.gradleplugins:gradle-api:6.9"
-gradle-api-75 = "dev.gradleplugins:gradle-api:7.5"
+gradle-api-76 = "dev.gradleplugins:gradle-api:7.6.4"
 gradle-api-80 = "dev.gradleplugins:gradle-api:8.0"
 gradle-api-81 = "dev.gradleplugins:gradle-api:8.1"
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.gradle.api.get75())
+    compileOnly(libs.gradle.api.get76())
     implementation(project(":plugin:common"))
 }
 
