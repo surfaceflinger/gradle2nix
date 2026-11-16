@@ -7,6 +7,11 @@ static boolean versionAtLeast(String version) {
 static void configureRepos(RepositoryHandler repositories) {
     repositories.configureEach { ArtifactRepository repo ->
         if (repo instanceof MavenArtifactRepository) {
+            // Don't override file-based repositories injected by plugins
+            // (e.g. toolchain caches); they already resolve locally.
+            if (repo.url.getScheme() == "file") {
+                return;
+            }
             repo.setArtifactUrls(new HashSet<URI>())
             repo.url 'file:@mavenRepo@'
             repo.metadataSources {
@@ -39,4 +44,13 @@ beforeSettings { settings ->
 beforeProject { project ->
     configureRepos(project.buildscript.repositories)
     configureRepos(project.repositories)
+}
+
+gradle.projectsLoaded {
+    rootProject.allprojects {
+        tasks.withType(AbstractArchiveTask) {
+            preserveFileTimestamps = false
+            reproducibleFileOrder = true
+        }
+    }
 }
