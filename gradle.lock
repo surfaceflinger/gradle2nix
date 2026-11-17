@@ -285,6 +285,20 @@
       "hash": "sha256-OGHuMFGDS0aQTXOx4EpvAV2AXMTWnY/9/SEnNnMJKGY="
     }
   },
+  "dev.gradleplugins:gradle-api:7.6.4": {
+    "gradle-api-7.6.4.jar": {
+      "url": "https://repo.maven.apache.org/maven2/dev/gradleplugins/gradle-api/7.6.4/gradle-api-7.6.4.jar",
+      "hash": "sha256-SgZSgDGYq/HeMUzHBy52/aSwFgUL0HuH4X1Vt4iNj1I="
+    },
+    "gradle-api-7.6.4.module": {
+      "url": "https://repo.maven.apache.org/maven2/dev/gradleplugins/gradle-api/7.6.4/gradle-api-7.6.4.module",
+      "hash": "sha256-R6yavMnydZ4kUiXPeqBDwsCvaZTeztnp7g1zp5+ban4="
+    },
+    "gradle-api-7.6.4.pom": {
+      "url": "https://repo.maven.apache.org/maven2/dev/gradleplugins/gradle-api/7.6.4/gradle-api-7.6.4.pom",
+      "hash": "sha256-IxffAVSBYICBqaCt2rq632e6th8vsCno8V3LXBN1ot0="
+    }
+  },
   "dev.gradleplugins:gradle-api:6.9": {
     "gradle-api-6.9.jar": {
       "url": "https://repo.maven.apache.org/maven2/dev/gradleplugins/gradle-api/6.9/gradle-api-6.9.jar",
