@@ -6,12 +6,13 @@ static boolean versionAtLeast(String version) {
 
 static void configureRepos(RepositoryHandler repositories) {
     repositories.configureEach { ArtifactRepository repo ->
+        // Don't override file-based repositories injected by plugins
+        // (toolchain caches, loom's generated-artifact repo); they already
+        // resolve locally and often use their own layout.
+        if (repo.hasProperty('url') && repo.url?.getScheme() == "file") {
+            return;
+        }
         if (repo instanceof MavenArtifactRepository) {
-            // Don't override file-based repositories injected by plugins
-            // (e.g. toolchain caches); they already resolve locally.
-            if (repo.url.getScheme() == "file") {
-                return;
-            }
             repo.setArtifactUrls(new HashSet<URI>())
             repo.url 'file:@mavenRepo@'
             repo.metadataSources {
