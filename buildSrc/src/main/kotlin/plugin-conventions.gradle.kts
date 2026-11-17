@@ -4,7 +4,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("gradle-kotlin-conventions")
-    id("io.github.goooler.shadow")
+    id("com.gradleup.shadow")
     `java-gradle-plugin`
 }
 
@@ -22,10 +22,12 @@ configure<GradlePluginDevelopmentExtension> {
     }
 }
 
-configurations {
-    "api" {
-        dependencies.remove(project.dependencies.gradleApi())
-    }
+// The shims compile against per-Gradle-version API stubs. java-gradle-plugin
+// also puts the running Gradle's own API jar on the classpath, where the same
+// internal types have a different shape, so drop it and let the stubs win.
+sourceSets.configureEach {
+    val apiJarName = "gradle-api-${project.gradle.gradleVersion}.jar"
+    compileClasspath = compileClasspath.filter { it.name != apiJarName }
 }
 
 tasks {

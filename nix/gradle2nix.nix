@@ -2,7 +2,7 @@
   lib,
   buildGradlePackage,
   buildMavenRepo,
-  gradle,
+  gradle9,
   gradleSetupHook,
 }:
 
@@ -10,6 +10,7 @@ buildGradlePackage {
   pname = "gradle2nix";
   version = "2.0.0";
   lockFile = ../gradle.lock;
+  gradle = gradle9;
 
   src = lib.cleanSourceWith {
     filter = lib.cleanSourceFilter;
@@ -41,7 +42,7 @@ buildGradlePackage {
   };
 
   meta = with lib; {
-    inherit (gradle.meta) platforms;
+    inherit (gradle9.meta) platforms;
     description = "Wrap Gradle builds with Nix";
     homepage = "https://github.com/tadfisher/gradle2nix";
     license = licenses.asl20;
