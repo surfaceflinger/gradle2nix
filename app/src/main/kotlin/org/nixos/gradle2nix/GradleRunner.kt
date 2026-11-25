@@ -62,6 +62,7 @@ suspend fun ProjectConnection.build(
 
         val systemProperties =
             buildMap {
+                putAll(config.systemProperties)
                 if (config.dumpEvents) {
                     put(
                         "org.gradle.internal.operations.trace",

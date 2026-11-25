@@ -40,6 +40,7 @@ data class Config(
     val artifacts: List<ArtifactType>,
     val logger: Logger,
     val dumpEvents: Boolean,
+    val systemProperties: Map<String, String>,
 )
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -163,6 +164,12 @@ class Gradle2Nix :
         help = "Print a stack trace on error",
     ).flag()
 
+    private val systemPropertyArgs: List<String> by option(
+        "--system-property",
+        metavar = "KEY=VALUE",
+        help = "Comma-separated Gradle system properties for the build, e.g. org.gradle.java.installations.paths=/jdk21:/jdk25",
+    ).split(",").default(emptyList())
+
     private val gradleArgs: List<String> by argument(
         name = "ARGS",
         help = "Extra arguments to pass to Gradle",
@@ -198,6 +205,12 @@ class Gradle2Nix :
                 artifacts,
                 logger,
                 dumpEvents,
+                systemPropertyArgs.associate {
+                    val (key, value) = it.split("=", limit = 2).also { parts ->
+                        require(parts.size == 2) { "expected KEY=VALUE for -D/--system-property, got: $it" }
+                    }
+                    key to value
+                },
             )
 
         val buildSrcs =
